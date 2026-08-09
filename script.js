@@ -72,11 +72,31 @@ document.addEventListener('mouseleave', function() {
 });
 
 const button = document.getElementById('myBtn');
+const backButton = document.getElementById('backBtn');
+const mainScreen = document.getElementById('mainScreen');
+const systemScreen = document.getElementById('systemScreen');
+
 button.addEventListener('click', function() {
     plate.style.transform = 'scale(0.96) rotateY(0deg) rotateX(0deg)';
     document.body.style.backgroundColor = '#800000';
     
     setTimeout(() => {
-        window.location.href = 'system.html';
+        document.body.style.backgroundColor = '';
+        mainScreen.style.display = 'none';
+        systemScreen.style.display = 'block';
+        setTimeout(() => {
+            systemScreen.style.opacity = '1';
+            systemScreen.style.transform = 'scale(1)';
+        }, 10);
     }, 150);
+});
+
+backButton.addEventListener('click', function() {
+    systemScreen.style.opacity = '0';
+    systemScreen.style.transform = 'scale(0.9)';
+    
+    setTimeout(() => {
+        systemScreen.style.display = 'none';
+        mainScreen.style.display = 'block';
+    }, 300);
 });
