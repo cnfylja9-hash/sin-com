@@ -11,13 +11,19 @@
 
     <canvas id="bloodCanvas"></canvas>
 
-    <div class="doom-wrapper">
+    <div class="doom-wrapper" id="mainScreen">
         <div class="doom-plate">
             <h1 class="logo-text">S I N . c o m</h1>
             <div class="line"></div>
             <p class="sub-text">SYSTEM INITIATED // ACCESS REQUIRED</p>
             <button id="myBtn" class="doom-btn">ENTER</button>
         </div>
+    </div>
+
+    <div class="access-container id-hidden" id="systemScreen">
+        <h1>ACCESS GRANTED</h1>
+        <p>ДОБРО ПОЖАЛОВАТЬ В СИСТЕМУ</p>
+        <button class="back-btn" id="backBtn">ВЫХОД</button>
     </div>
 
     <script src="script.js"></script>
