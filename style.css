@@ -26,6 +26,7 @@ body {
     position: relative;
     z-index: 2;
     transform-style: preserve-3d;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .doom-plate {
@@ -90,9 +91,62 @@ body {
     box-shadow: 0 0 40px #ff0000;
 }
 
-@media (max-width: 600px) {
-    .doom-plate { padding: 45px 35px; width: 92%; }
-    .logo-text { font-size: 40px; letter-spacing: 6px; }
-    .sub-text { font-size: 9px; letter-spacing: 2px; }
+.access-container {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    border: 3px solid #00ff00;
+    padding: 50px 70px;
+    background: #050a05;
+    box-shadow: 0 0 50px rgba(0, 255, 0, 0.3), inset 0 0 30px #000000;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
 }
 
+.access-container h1 {
+    color: #00ff00;
+    font-size: 40px;
+    letter-spacing: 8px;
+    margin: 0 0 20px 0;
+    text-shadow: 0 0 20px #00ff00;
+}
+
+.access-container p {
+    color: #889988;
+    font-size: 14px;
+    letter-spacing: 3px;
+    margin: 0;
+}
+
+.back-btn {
+    margin-top: 40px;
+    background: transparent;
+    color: #00ff00;
+    border: 2px solid #00ff00;
+    padding: 14px 50px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    transition: all 0.2s;
+}
+
+.back-btn:hover {
+    background: #00ff00;
+    color: #000000;
+    box-shadow: 0 0 35px #00ff00;
+}
+
+.id-hidden {
+    display: none;
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+@media (max-width: 600px) {
+    .doom-plate, .access-container { padding: 45px 35px; width: 92%; }
+    .logo-text { font-size: 40px; letter-spacing: 6px; }
+    .access-container h1 { font-size: 28px; letter-spacing: 4px; }
+    .sub-text { font-size: 9px; letter-spacing: 2px; }
+}
