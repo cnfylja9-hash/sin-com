@@ -1,69 +1,97 @@
-const canvas = document.getElementById('bloodCanvas');
-const ctx = canvas.getContext('2d');
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
-const count = 40;
-const drops = [];
-
-for (let i = 0; i < count; i++) {
-    drops.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height - canvas.height,
-        length: Math.random() * 40 + 20,
-        speed: Math.random() * 2 + 1,
-        weight: Math.random() * 2 + 1
-    });
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #020000;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Orbitron', sans-serif;
+    position: relative;
+    perspective: 1000px;
 }
 
-function drawBlood() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    ctx.fillStyle = 'rgba(3, 1, 1, 1)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    for (let i = 0; i < drops.length; i++) {
-        let d = drops[i];
-        
-        let grad = ctx.createLinearGradient(d.x, d.y, d.x, d.y + d.length);
-        grad.addColorStop(0, 'rgba(74, 0, 0, 0)');
-        grad.addColorStop(1, 'rgba(180, 0, 0, 0.9)');
-        
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = d.weight;
-        ctx.lineCap = 'round';
-        
-        ctx.beginPath();
-        ctx.moveTo(d.x, d.y);
-        ctx.lineTo(d.x, d.y + d.length);
-        ctx.stroke();
-
-        d.y += d.speed;
-
-        if (d.y > canvas.height) {
-            d.x = Math.random() * canvas.width;
-            d.y = -d.length;
-            d.speed = Math.random() * 2 + 1;
-        }
-    }
-    requestAnimationFrame(drawBlood);
+#bloodCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.9;
 }
-drawBlood();
 
-const button = document.getElementById('myBtn');
-button.addEventListener('click', function() {
-    const plate = document.querySelector('.doom-plate');
-    
-    plate.style.transform = 'scale(0.98)';
-    document.body.style.backgroundColor = '#5c0000';
-    
-    setTimeout(() => {
-        plate.style.transform = 'none';
-        document.body.style.backgroundColor = '';
-    }, 150);
-});
+.doom-wrapper {
+    position: relative;
+    z-index: 2;
+    transform-style: preserve-3d;
+}
+
+.doom-plate {
+    background: #0a0505;
+    border: 3px solid #ff0000;
+    padding: 60px 80px;
+    text-align: center;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.3), inset 0 0 40px #000000;
+    clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+}
+
+.logo-text {
+    color: #ffffff;
+    font-size: 66px;
+    font-weight: 900;
+    letter-spacing: 14px;
+    margin: 0;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px #ff0000, 0 0 40px #8b0000;
+    transform: translateZ(50px);
+}
+
+.line {
+    height: 4px;
+    background: #ff0000;
+    margin: 30px 0;
+    transform: translateZ(30px);
+    box-shadow: 0 0 15px #ff0000;
+}
+
+.sub-text {
+    color: #9c9090;
+    font-size: 13px;
+    letter-spacing: 5px;
+    margin-bottom: 40px;
+    font-weight: 900;
+    transform: translateZ(25px);
+    text-shadow: 0 0 5px #000000;
+}
+
+.doom-btn {
+    background: #000000;
+    color: #ff0000;
+    border: 2px solid #ff0000;
+    padding: 16px 60px;
+    font-size: 18px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    letter-spacing: 5px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    transform: translateZ(40px);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+}
+
+.doom-btn:hover {
+    background: #ff0000;
+    color: #000000;
+    box-shadow: 0 0 40px #ff0000;
+}
+
+@media (max-width: 600px) {
+    .doom-plate { padding: 45px 35px; width: 92%; }
+    .logo-text { font-size: 40px; letter-spacing: 6px; }
+    .sub-text { font-size: 9px; letter-spacing: 2px; }
+}
