@@ -77,7 +77,6 @@ button.addEventListener('click', function() {
     document.body.style.backgroundColor = '#800000';
     
     setTimeout(() => {
-        plate.style.transform = 'none';
-        document.body.style.backgroundColor = '';
+        window.location.href = 'system.html';
     }, 150);
 });
