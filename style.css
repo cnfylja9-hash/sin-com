@@ -1,0 +1,91 @@
+/* Полный сброс и черная бездна на фоне */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Permanent Marker', sans-serif;
+    
+    /* Эффект кровавого перелива на фоне */
+    background: radial-gradient(circle, #1a0000 0%, #000000 100%);
+    animation: bloodPulse 6s ease-in-out infinite alternate;
+}
+
+/* Анимация пульсации крови на фоне */
+@keyframes bloodPulse {
+    0% {
+        background: radial-gradient(circle, #200000 0%, #000000 100%);
+    }
+    50% {
+        background: radial-gradient(circle, #4a0000 0%, #000000 100%);
+        box-shadow: inset 0 0 100px rgba(139, 0, 0, 0.4);
+    }
+    100% {
+        background: radial-gradient(circle, #150000 0%, #000000 100%);
+    }
+}
+
+/* Брутальная плашка из Дума */
+.doom-plate {
+    background: rgba(10, 10, 10, 0.95);
+    border: 3px solid #8b0000;
+    padding: 40px 60px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(139, 0, 0, 0.7), inset 0 0 20px rgba(0, 0, 0, 1);
+    transform: skewX(-3deg); /* Небольшой агрессивный наклон */
+    position: relative;
+}
+
+/* Жесткий горящий текст */
+.logo-text {
+    font-family: 'Rubik Glitch', 'Permanent Marker', sans-serif;
+    color: #ff0000;
+    font-size: 56px;
+    letter-spacing: 8px;
+    margin: 0;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #8b0000;
+    text-transform: uppercase;
+}
+
+/* Разделительная линия */
+.line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ff0000, transparent);
+    margin: 15px 0;
+}
+
+/* Подтекст */
+.sub-text {
+    color: #a0a0a0;
+    font-size: 14px;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+/* Инфернальная кнопка */
+.doom-btn {
+    background: #2b0000;
+    color: #ff3333;
+    border: 2px solid #ff0000;
+    padding: 12px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: Arial, sans-serif;
+}
+
+.doom-btn:hover {
+    background: #ff0000;
+    color: #000000;
+    box-shadow: 0 0 20px #ff0000;
+    transform: scale(1.05);
+}
+
