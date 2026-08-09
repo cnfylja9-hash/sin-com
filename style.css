@@ -1,109 +1,132 @@
-/* Полный сброс и черная бездна на фоне */
+/* Мрачный технологичный фон */
 body {
     margin: 0;
     padding: 0;
-    background-color: #000000;
+    background-color: #050505;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    font-family: 'Permanent Marker', sans-serif;
-    
-    /* Эффект кровавого перелива на фоне */
-    background: radial-gradient(circle, #1a0000 0%, #000000 100%);
-    animation: bloodPulse 6s ease-in-out infinite alternate;
-}
-
-/* Анимация пульсации крови на фоне */
-@keyframes bloodPulse {
-    0% {
-        background: radial-gradient(circle, #200000 0%, #000000 100%);
-    }
-    50% {
-        background: radial-gradient(circle, #4a0000 0%, #000000 100%);
-        box-shadow: inset 0 0 100px rgba(139, 0, 0, 0.4);
-    }
-    100% {
-        background: radial-gradient(circle, #150000 0%, #000000 100%);
-    }
-}
-
-/* Брутальная плашка из Дума */
-.doom-plate {
-    background: rgba(10, 10, 10, 0.95);
-    border: 3px solid #8b0000;
-    padding: 40px 60px;
-    text-align: center;
-    box-shadow: 0 0 30px rgba(139, 0, 0, 0.7), inset 0 0 20px rgba(0, 0, 0, 1);
-    transform: skewX(-3deg); /* Небольшой агрессивный наклон */
+    font-family: 'Share Tech Tech Mono', monospace;
     position: relative;
 }
 
-/* Жесткий горящий текст */
+/* Холст с эффектом крови на заднем плане */
+#bloodCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.7;
+}
+
+/* Брутальная металлическая плашка с постоянным глитчем */
+.doom-plate {
+    background: rgba(15, 15, 15, 0.95);
+    border: 3px solid #ff003c;
+    padding: 40px 60px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255, 0, 60, 0.5), inset 0 0 20px rgba(0, 0, 0, 1);
+    transform: skewX(-4deg);
+    position: relative;
+    z-index: 2;
+    animation: plateDistort 4s infinite;
+}
+
+/* Постоянное легкое искажение формы плашки */
+@keyframes plateDistort {
+    0% { transform: skewX(-4deg) scale(1); }
+    98% { transform: skewX(-4deg) scale(1); }
+    99% { transform: skewX(-8deg) scale(1.02); filter: brightness(1.5); }
+    100% { transform: skewX(-4deg) scale(1); }
+}
+
+/* Настоящий трехцветный глитч-эффект для текста */
 .logo-text {
-    font-family: 'Rubik Glitch', 'Permanent Marker', sans-serif;
-    color: #ff0000;
-    font-size: 56px;
-    letter-spacing: 8px;
+    font-family: 'Orbitron', sans-serif;
+    color: #ffffff;
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: 10px;
     margin: 0;
-    text-shadow: 0 0 10px #ff0000, 0 0 20px #8b0000;
+    position: relative;
     text-transform: uppercase;
+    text-shadow: 0.05em 0 0 rgba(255, 0, 60, 0.75),
+                -0.025em -0.05em 0 rgba(0, 240, 255, 0.75),
+                0.025em 0.05em 0 rgba(255, 255, 0, 0.75);
+    animation: glitch 1s infinite;
 }
 
-/* Разделительная линия */
+/* Анимация смещения слоев глитча */
+@keyframes glitch {
+    0% {
+        text-shadow: 0.05em 0 0 rgba(255, 0, 60, 0.75), -0.025em -0.05em 0 rgba(0, 240, 255, 0.75), 0.025em 0.05em 0 rgba(255, 255, 0, 0.75);
+    }
+    14% {
+        text-shadow: 0.05em 0 0 rgba(255, 0, 60, 0.75), -0.025em -0.05em 0 rgba(0, 240, 255, 0.75), 0.025em 0.05em 0 rgba(255, 255, 0, 0.75);
+    }
+    15% {
+        text-shadow: -0.05em -0.025em 0 rgba(255, 0, 60, 0.75), 0.025em 0.025em 0 rgba(0, 240, 255, 0.75), -0.05em -0.05em 0 rgba(255, 255, 0, 0.75);
+    }
+    49% {
+        text-shadow: -0.05em -0.025em 0 rgba(255, 0, 60, 0.75), 0.025em 0.025em 0 rgba(0, 240, 255, 0.75), -0.05em -0.05em 0 rgba(255, 255, 0, 0.75);
+    }
+    50% {
+        text-shadow: 0.025em 0.05em 0 rgba(255, 0, 60, 0.75), 0.05em 0 0 rgba(0, 240, 255, 0.75), 0 -0.05em 0 rgba(255, 255, 0, 0.75);
+    }
+    99% {
+        text-shadow: 0.025em 0.05em 0 rgba(255, 0, 60, 0.75), 0.05em 0 0 rgba(0, 240, 255, 0.75), 0 -0.05em 0 rgba(255, 255, 0, 0.75);
+    }
+    100% {
+        text-shadow: -0.025em 0 0 rgba(255, 0, 60, 0.75), -0.025em -0.025em 0 rgba(0, 240, 255, 0.75), -0.025em -0.05em 0 rgba(255, 255, 0, 0.75);
+    }
+}
+
+/* Разделитель */
 .line {
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #ff0000, transparent);
-    margin: 15px 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #ff003c, #00f0ff, transparent);
+    margin: 20px 0;
 }
 
-/* Подтекст */
+/* Системный подтекст */
 .sub-text {
-    color: #a0a0a0;
+    color: #00f0ff;
     font-size: 14px;
-    letter-spacing: 4px;
-    margin-bottom: 25px;
-    font-family: Arial, sans-serif;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
     font-weight: bold;
+    text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
 }
 
-/* Инфернальная кнопка */
+/* Кнопка запуска */
 .doom-btn {
-    background: #2b0000;
-    color: #ff3333;
-    border: 2px solid #ff0000;
-    padding: 12px 40px;
+    background: transparent;
+    color: #ff003c;
+    border: 2px solid #ff003c;
+    padding: 15px 50px;
     font-size: 18px;
-    font-weight: bold;
-    letter-spacing: 2px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    letter-spacing: 3px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: Arial, sans-serif;
+    transition: all 0.1s ease;
+    box-shadow: 0 0 10px rgba(255, 0, 60, 0.2);
 }
 
 .doom-btn:hover {
-    background: #ff0000;
-    color: #000000;
-    box-shadow: 0 0 20px #ff0000;
-    transform: scale(1.05);
+    background: #ff003c;
+    color: #ffffff;
+    box-shadow: 0 0 30px #ff003c, 0 0 10px #00f0ff;
+    transform: scale(1.05) rotate(-1deg);
 }
 
-
-
-/* Адаптивность для мобильных экранов */
+/* Адаптивность для мобилок */
 @media (max-width: 600px) {
-    .doom-plate {
-        padding: 30px 20px; /* Уменьшаем внутренние отступы плашки, чтобы она влезла */
-        width: 90%;         /* Плашка займет 90% ширины экрана смартфона */
-    }
-    
-    .logo-text {
-        font-size: 36px;    /* Уменьшаем размер букв S I N . c o m */
-        letter-spacing: 4px;/* Немного сжимаем буквы между собой */
-    }
-    
-    .sub-text {
-        font-size: 11px;    /* Делаем фразу "ДОБРО ПОЖАЛОВАТЬ В АД" аккуратнее */
-    }
+    .doom-plate { padding: 30px 20px; width: 92%; }
+    .logo-text { font-size: 40px; letter-spacing: 5px; }
+    .sub-text { font-size: 10px; letter-spacing: 2px; }
 }
