@@ -8,31 +8,29 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
-const count = 40;
+const count = 50;
 const drops = [];
 
 for (let i = 0; i < count; i++) {
     drops.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height - canvas.height,
-        length: Math.random() * 40 + 20,
-        speed: Math.random() * 2 + 1,
-        weight: Math.random() * 2 + 1
+        length: Math.random() * 50 + 30,
+        speed: Math.random() * 3 + 1.5,
+        weight: Math.random() * 2.5 + 1
     });
 }
 
 function drawBlood() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    ctx.fillStyle = 'rgba(3, 1, 1, 1)';
+    ctx.fillStyle = '#020000';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     for (let i = 0; i < drops.length; i++) {
         let d = drops[i];
-        
         let grad = ctx.createLinearGradient(d.x, d.y, d.x, d.y + d.length);
-        grad.addColorStop(0, 'rgba(74, 0, 0, 0)');
-        grad.addColorStop(1, 'rgba(180, 0, 0, 0.9)');
+        grad.addColorStop(0, 'rgba(50, 0, 0, 0)');
+        grad.addColorStop(1, 'rgba(210, 0, 0, 0.95)');
         
         ctx.strokeStyle = grad;
         ctx.lineWidth = d.weight;
@@ -48,23 +46,38 @@ function drawBlood() {
         if (d.y > canvas.height) {
             d.x = Math.random() * canvas.width;
             d.y = -d.length;
-            d.speed = Math.random() * 2 + 1;
+            d.speed = Math.random() * 3 + 1.5;
         }
     }
     requestAnimationFrame(drawBlood);
 }
 drawBlood();
 
+const plate = document.querySelector('.doom-plate');
+
+document.addEventListener('mousemove', function(e) {
+    const xAxis = (window.innerWidth / 2 - e.pageX) / 20;
+    const yAxis = (window.innerHeight / 2 - e.pageY) / 20;
+    
+    plate.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis}deg)`;
+    
+    const shadowX = xAxis * -1.5;
+    const shadowY = yAxis * 1.5;
+    plate.style.boxShadow = `${shadowX}px ${shadowY}px 50px rgba(255, 0, 0, 0.45), inset 0 0 40px #000000`;
+});
+
+document.addEventListener('mouseleave', function() {
+    plate.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    plate.style.boxShadow = '0 0 40px rgba(255, 0, 0, 0.3), inset 0 0 40px #000000';
+});
+
 const button = document.getElementById('myBtn');
 button.addEventListener('click', function() {
-    const plate = document.querySelector('.doom-plate');
-    
-    plate.style.transform = 'scale(0.98)';
-    document.body.style.backgroundColor = '#5c0000';
+    plate.style.transform = 'scale(0.96) rotateY(0deg) rotateX(0deg)';
+    document.body.style.backgroundColor = '#800000';
     
     setTimeout(() => {
         plate.style.transform = 'none';
         document.body.style.backgroundColor = '';
     }, 150);
 });
-
